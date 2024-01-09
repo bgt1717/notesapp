@@ -3,13 +3,14 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Auth from './pages/auth';
 import Home from './pages/home';
 import CreateNote from './pages/createNote';
+import Navbar from './components/navbar';
 
 function App() {
 
   return (
     <>
     <Router>
-      {/* <Navbar/> */}
+      <Navbar/>
       <Routes>
         {/* Element is the component that is rendered when going to path.  */}
         <Route path="/" element={<Home />} />
