@@ -8,7 +8,8 @@ app.use(express.json()); //JSON middleware. data sent from frontend is converted
 app.use(cors()); //Resolves issues with API requests with frontend.
 
 mongoose.connect("mongodb+srv://brycetown10:T44MAyOhrGnIepnE@notesapp.qyr1dbx.mongodb.net/") // Connects to server. 
-
+.then(() => console.log('Connected to MongoDB'))
+.catch(error => console.error('MongoDB connection error:', error));
 
 app.listen(3001, () => console.log("server started")); //Tells API to start, has a call back function that logs server started in the console. 
 
