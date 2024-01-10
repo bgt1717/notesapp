@@ -1,38 +1,70 @@
-import React, { useState } from 'react';
-import { useGetUserID } from '../hooks/useGetUserID';
-
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 const CreateNote = () => {
-  const userID = useGetUserID(); // Assuming useGetUserID is a hook returning the user ID
+  const [cookies, _] = useCookies(["access_token"]);
 
-  const [noteContent, setNoteContent] = useState('');
+  const [note, setNote] = useState({
+    title: "",
+    lines: [{ content: "" }], // Start with an empty line object
+    createdAt: new Date(),
+  });
 
-  const handleNoteSubmit = (event) => {
+  const navigate = useNavigate();
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setNote({ ...note, [name]: value });
+  };
+
+  const handleLineChange = (event, idx) => {
+    const { value } = event.target;
+    const lines = [...note.lines];
+    lines[idx] = { content: value };
+    setNote({ ...note, lines });
+  };
+
+  const addLine = () => {
+    setNote({ ...note, lines: [...note.lines, { content: "" }] });
+  };
+
+  const onSubmit = async (event) => {
     event.preventDefault();
-    // Add logic to submit the note, e.g., make an API request to save the note
-
-    // For demonstration purposes, log the note content and user ID
-    console.log('User ID:', userID);
-    console.log('Note Content:', noteContent);
-
-    // You can reset the form or perform any other necessary actions
-    setNoteContent('');
+    try {
+      await axios.post("http://localhost:3001/notes/create-note", note, {
+        headers: { authorization: cookies.access_token },
+      });
+      alert("Note Created");
+      navigate("/savednotes");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
-    <div>
+    <div className="create-note">
       <h2>Create Note</h2>
-      <form onSubmit={handleNoteSubmit}>
-        <textarea
-          value={noteContent}
-          onChange={(e) => setNoteContent(e.target.value)}
-          placeholder="Enter your note here (max 50 characters per line)"
-          rows={4}
-          maxLength={200} // Assuming 50 characters per line for 4 lines
-          required
-        />
-        <br />
-        <button type="submit">Add Note</button>
+      <form onSubmit={onSubmit}>
+        <label htmlFor="title">Title</label>
+        <input type="text" id="title" name="title" onChange={handleChange} />
+
+        <label htmlFor="lines">Lines</label>
+        {note.lines.map((line, idx) => (
+          <input
+            key={idx}
+            type="text"
+            name="lines"
+            value={line.content}
+            onChange={(event) => handleLineChange(event, idx)}
+          />
+        ))}
+        <button type="button" onClick={addLine}>
+          Add Line
+        </button>
+
+        <button type="submit">Create Note</button>
       </form>
     </div>
   );

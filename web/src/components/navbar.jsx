@@ -14,12 +14,13 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <Link to="/"> Home </Link>
-      {/* <Link to="/createnote"> Create Note </Link> */}
+      
 
       {!cookies.access_token ? (<Link to="/auth"> Login/Register </Link> //If there is not an access token in cookies, route to Login/Register page.  
       ) : ( 
         <>
       <Link to="/createnote"> Create Note </Link>
+      <Link to="/savednotes"> Saved Notes </Link>
 
       <button onClick={logout}>Logout </button>                   
       </> //Otherwise, Display a button to Logout. When pressed, it calls the logout function.

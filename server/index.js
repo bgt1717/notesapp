@@ -3,6 +3,7 @@ import cors from 'cors'; // Rules between frontend and backend.
 import mongoose from 'mongoose'; // Database management system, allows queries to database. 
 
 import {userRouter} from './routes/users.js'
+import {noteRouter } from "./routes/notes.js";
 
 const app = express(); //generate version of API.
 
@@ -10,7 +11,7 @@ app.use(express.json()); //JSON middleware. data sent from frontend is converted
 app.use(cors()); //Resolves issues with API requests with frontend.
 
 app.use("/auth", userRouter); // Seperating code to write endpoints related to authentication will exist in users.js
-
+app.use("/notes", noteRouter);
 mongoose.connect("mongodb+srv://brycetown10:T44MAyOhrGnIepnE@notesapp.qyr1dbx.mongodb.net/") // Connects to server. 
 .then(() => console.log('Connected to MongoDB'))
 .catch(error => console.error('MongoDB connection error:', error));
