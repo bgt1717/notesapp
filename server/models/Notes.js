@@ -9,6 +9,7 @@ const NoteSchema = new mongoose.Schema({
     },
   ],
   createdAt: { type: Date, default: Date.now },
+  // userOwner: {type: mongoose.Schema.Types.ObjectId, ref: "users", required: true}
 });
 
 export const NoteModel = mongoose.model("Note", NoteSchema);

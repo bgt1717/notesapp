@@ -58,7 +58,7 @@ const CreateNote = () => {
         headers: { authorization: cookies.access_token },
       });
       alert("Note created successfully!");
-      navigate("/savednotes");
+      navigate("/createnote");
     } catch (err) {
       console.error(err);
       alert("Note creation failed. Please try again.");
