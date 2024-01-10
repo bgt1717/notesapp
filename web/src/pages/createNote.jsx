@@ -1,4 +1,4 @@
-// CreateNote.js
+// components/CreateNote.js
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -57,8 +57,10 @@ const CreateNote = () => {
       await axios.post("http://localhost:3001/notes/create-note", note, {
         headers: { authorization: cookies.access_token },
       });
+
+      // Update the URL to navigate to the correct endpoint
       alert("Note created successfully!");
-      navigate("/createnote");
+      navigate("/"); // Change this to your desired route
     } catch (err) {
       console.error(err);
       alert("Note creation failed. Please try again.");

@@ -39,15 +39,21 @@ router.post("/login", async (req, res) =>{
 
 export {router as userRouter};
 
-//middleware
 export const verifyToken = (req, res, next) => {
     const token = req.headers.authorization;
-    if(token){
-        jwt.verify(token, "secret", (err) =>{
-            if(err) return res.sendStatus(403);
+    if (token) {
+        jwt.verify(token, "secret", (err, decodedToken) => {
+            if (err) {
+                console.error(err);
+                req.user = undefined; // Set req.user to undefined on verification failure
+                return res.sendStatus(403);
+            }
+            req.user = decodedToken; // Set req.user to decoded user information
             next();
         });
     } else {
+        req.user = undefined; // Set req.user to undefined if no token is present
         res.sendStatus(401);
     }
 };
+
