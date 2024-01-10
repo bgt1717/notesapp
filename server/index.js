@@ -16,6 +16,7 @@ mongoose.connect("mongodb+srv://brycetown10:T44MAyOhrGnIepnE@notesapp.qyr1dbx.mo
 .then(() => console.log('Connected to MongoDB'))
 .catch(error => console.error('MongoDB connection error:', error));
 
+
 app.listen(3001, () => console.log("server started")); //Tells API to start, has a call back function that logs server started in the console. 
 
 

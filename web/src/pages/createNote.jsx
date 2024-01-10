@@ -1,26 +1,29 @@
+// CreateNote.js
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { useGetUserID } from "../hooks/useGetUserID";
 
 const CreateNote = () => {
   const [cookies, _] = useCookies(["access_token"]);
+  const userID = useGetUserID();
 
   const [note, setNote] = useState({
     title: "",
     lines: [{ content: "" }],
-    createdAt: new Date(),
+    createdAt: new Date().toISOString().split("T")[0],
   });
 
-  const [userNotes, setUserNotes] = useState([]); // New state for storing user's notes
+  const [userNotes, setUserNotes] = useState([]);
 
   const navigate = useNavigate();
 
-  // Fetch user's notes when the component mounts
   useEffect(() => {
     const fetchUserNotes = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/notes/get-notes", {
+        const url = `http://localhost:3001/notes/get-notes/${userID}`;
+        const response = await axios.get(url, {
           headers: { authorization: cookies.access_token },
         });
         setUserNotes(response.data.notes);
@@ -30,7 +33,7 @@ const CreateNote = () => {
     };
 
     fetchUserNotes();
-  }, [cookies.access_token]);
+  }, [userID, cookies.access_token]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -54,17 +57,17 @@ const CreateNote = () => {
       await axios.post("http://localhost:3001/notes/create-note", note, {
         headers: { authorization: cookies.access_token },
       });
-      alert("Note Created");
+      alert("Note created successfully!");
       navigate("/savednotes");
     } catch (err) {
-      console.log(err);
+      console.error(err);
+      alert("Note creation failed. Please try again.");
     }
   };
 
   return (
     <div className="create-note">
       <h2>Create Note</h2>
-      {/* Display user's existing notes */}
       <div>
         <h3>Your Existing Notes:</h3>
         <ul>
