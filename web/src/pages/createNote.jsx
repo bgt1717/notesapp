@@ -17,7 +17,7 @@ const CreateNote = () => {
 
   const [userNotes, setUserNotes] = useState([]);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserNotes = async () => {
@@ -60,7 +60,8 @@ const CreateNote = () => {
 
       // Update the URL to navigate to the correct endpoint
       alert("Note created successfully!");
-      navigate("/"); // Change this to your desired route
+      // navigate("/"); // Change this to your desired route
+      window.location.reload(); //refreshes page upon success. 
     } catch (err) {
       console.error(err);
       alert("Note creation failed. Please try again.");
@@ -72,11 +73,16 @@ const CreateNote = () => {
       <h2>Create Note</h2>
       <div>
         <h3>Your Existing Notes:</h3>
-        <ul>
-          {userNotes.map((userNote) => (
-            <li key={userNote._id}>{userNote.title}</li>
-          ))}
-        </ul>
+        {userNotes.map((userNote) => (
+          <div key={userNote._id}>
+            <h4>{userNote.title}</h4>
+            <ul>
+              {userNote.lines.map((line, idx) => (
+                <li key={idx}>{line.content}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
       <form onSubmit={onSubmit}>
         <label htmlFor="title">Title</label>
