@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
@@ -8,11 +8,29 @@ const CreateNote = () => {
 
   const [note, setNote] = useState({
     title: "",
-    lines: [{ content: "" }], // Start with an empty line object
+    lines: [{ content: "" }],
     createdAt: new Date(),
   });
 
+  const [userNotes, setUserNotes] = useState([]); // New state for storing user's notes
+
   const navigate = useNavigate();
+
+  // Fetch user's notes when the component mounts
+  useEffect(() => {
+    const fetchUserNotes = async () => {
+      try {
+        const response = await axios.get("http://localhost:3001/notes/get-notes", {
+          headers: { authorization: cookies.access_token },
+        });
+        setUserNotes(response.data.notes);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchUserNotes();
+  }, [cookies.access_token]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -46,6 +64,15 @@ const CreateNote = () => {
   return (
     <div className="create-note">
       <h2>Create Note</h2>
+      {/* Display user's existing notes */}
+      <div>
+        <h3>Your Existing Notes:</h3>
+        <ul>
+          {userNotes.map((userNote) => (
+            <li key={userNote._id}>{userNote.title}</li>
+          ))}
+        </ul>
+      </div>
       <form onSubmit={onSubmit}>
         <label htmlFor="title">Title</label>
         <input type="text" id="title" name="title" onChange={handleChange} />
