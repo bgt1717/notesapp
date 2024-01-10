@@ -70,11 +70,12 @@ const CreateNote = () => {
   return (
     <div className="create-note">
       {/* <h2>Create Note</h2> */}
-      <div>
+      <div className="existing-notes">
         <h3>Your Existing Notes:</h3>
+        
         {userNotes.map((userNote) => (
-          <div key={userNote._id}>
-            <h4>{userNote.title}</h4>
+          <div className="title-lines" key={userNote._id}>
+            <div className="title">{userNote.title}</div>
             <ul>
               {userNote.lines.map((line, idx) => (
                 <li key={idx}>{line.content}</li>
@@ -84,6 +85,7 @@ const CreateNote = () => {
         ))}
       </div>
       <form onSubmit={onSubmit}>
+      
         <label htmlFor="title">Title</label>
         <input type="text" id="title" name="title" onChange={handleChange} />
 
@@ -97,6 +99,7 @@ const CreateNote = () => {
             onChange={(event) => handleLineChange(event, idx)}
           />
         ))}
+        
         <button type="button" onClick={addLine}>
           Add Line
         </button>
