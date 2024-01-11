@@ -82,6 +82,33 @@ const CreateNote = () => {
     }
   };
 
+    // Function to edit a note
+    const editNote = async (noteID) => {
+      try {
+        // Fetch the existing note data
+        const existingNote = userNotes.find((note) => note._id === noteID);
+  
+        // Prompt user to input new data
+        const newTitle = prompt("Enter new title:", existingNote.title);
+        const newLines = prompt("Enter new lines (comma-separated):", existingNote.lines.join(","));
+        
+        // Send a PUT request to update the note
+        await axios.put(`http://localhost:3001/notes/update-note/${noteID}`, {
+          title: newTitle,
+          lines: newLines.split(",").map(line => ({ content: line.trim() })),
+        }, {
+          headers: { authorization: cookies.access_token },
+        });
+  
+        alert("Note updated successfully!");
+        window.location.reload(); // Refresh the page upon success
+      } catch (err) {
+        console.error(err);
+        alert("Note update failed. Please try again.");
+      }
+    };
+  
+
 
   return (
     <div className="create-note">
@@ -98,7 +125,11 @@ const CreateNote = () => {
               ))}
             </ul>
             
-            {/* Add delete button for each note */}
+            {/* Add edit and delete buttons for each note */}
+            <button className="formbutton" onClick={() => editNote(userNote._id)}>
+              Edit Note
+            </button>
+            
             <button className="formbutton" onClick={() => deleteNote(userNote._id)}>
               Delete Note
             </button>
