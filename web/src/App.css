@@ -111,7 +111,7 @@ p {
 
 /* Add this style to your CSS */
 .existing-notes {
-  background-color: yellow;
+  background-color: lightsalmon;
   /* padding: 20px;  */
   display: flex;
   flex-direction: column;
