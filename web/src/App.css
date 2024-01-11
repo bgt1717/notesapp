@@ -100,9 +100,12 @@ p {
 
 .create-note {
   display: flex;
-  flex-direction: row; /* Change to row to place .existing-notes next to the form */
-  justify-content: space-between; /* Add space between the form and .existing-notes */
+  justify-content: space-around; /* Adjust as needed */
+  background-color: lightgrey; /* Set the background color to match .auth */
+  padding: 20px;
+  padding-bottom: 20vh; /* Remove margin */
 }
+
 
 /* Existing styles for .existing-notes remain unchanged */
 .existing-notes {
@@ -141,6 +144,7 @@ p {
   background-color: lightgreen;
   width: 50%;
   padding:20px;
+  
 }
 
 .formbutton{
