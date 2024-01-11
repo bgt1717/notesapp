@@ -71,7 +71,7 @@ const CreateNote = () => {
     <div className="create-note">
       {/* <h2>Create Note</h2> */}
       <div className="existing-notes">
-        <h3>Your Existing Notes:</h3>
+        <h3 className="title">Your Existing Notes:</h3>
         
         {userNotes.map((userNote) => (
           <div className="title-lines" key={userNote._id}>
@@ -87,10 +87,10 @@ const CreateNote = () => {
       <div className="form-container">
       <form onSubmit={onSubmit}>
       
-        <label htmlFor="title">Title</label>
+        <label className="title" htmlFor="title">Title</label>
         <input type="text" id="title" name="title" onChange={handleChange} />
 
-        <label htmlFor="lines">Lines</label>
+        <label className="title" htmlFor="lines">Lines</label>
         {note.lines.map((line, idx) => (
           <input
             key={idx}
@@ -101,11 +101,11 @@ const CreateNote = () => {
           />
         ))}
         
-        <button type="button" onClick={addLine}>
+        <button className="formbutton" type="button" onClick={addLine}>
           Add Line
         </button>
 
-        <button type="submit">Create Note</button>
+        <button className="formbutton" type="submit">Create Note</button>
       </form>
       </div>
     </div>
