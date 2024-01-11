@@ -39,6 +39,27 @@ router.post("/create-note", verifyToken, async (req, res) => {
   }
 });
 
+// Route to delete a note
+router.delete("/delete-note/:noteID", verifyToken, async (req, res) => {
+  try {
+    const noteID = req.params.noteID;
+
+    // Check if the note exists and belongs to the logged-in user
+    const existingNote = await NoteModel.findOne({ _id: noteID, userOwner: req.user.id });
+    if (!existingNote) {
+      return res.status(404).json({ message: "Note not found or unauthorized" });
+    }
+
+    // Delete the note
+    await NoteModel.findByIdAndDelete(noteID);
+
+    res.status(200).json({ message: "Note deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error", error: error.message });
+  }
+});
+
 
 // Export the router
 export { router as noteRouter };

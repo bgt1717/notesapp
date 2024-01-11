@@ -67,6 +67,22 @@ const CreateNote = () => {
     }
   };
 
+   // Function to delete a note
+   const deleteNote = async (noteID) => {
+    try {
+      await axios.delete(`http://localhost:3001/notes/delete-note/${noteID}`, {
+        headers: { authorization: cookies.access_token },
+      });
+
+      alert("Note deleted successfully!");
+      window.location.reload(); // Refresh the page upon success
+    } catch (err) {
+      console.error(err);
+      alert("Note deletion failed. Please try again.");
+    }
+  };
+
+
   return (
     <div className="create-note">
       {/* <h2>Create Note</h2> */}
@@ -81,6 +97,11 @@ const CreateNote = () => {
                 <li key={idx}>{line.content}</li>
               ))}
             </ul>
+            
+            {/* Add delete button for each note */}
+            <button className="formbutton" onClick={() => deleteNote(userNote._id)}>
+              Delete Note
+            </button>
           </div>
         ))}
       </div>
