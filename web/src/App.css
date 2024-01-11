@@ -103,7 +103,7 @@ p {
   justify-content: space-around; /* Adjust as needed */
   background-color: lightgrey; /* Set the background color to match .auth */
   padding: 20px;
-  padding-bottom: 20vh; /* Remove margin */
+  padding-bottom: 100%; /* Remove margin */
 }
 
 
@@ -130,7 +130,7 @@ p {
   width: 50%;
   border-radius: 5px;
   padding: 10px;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
   
 }
 
@@ -152,4 +152,5 @@ p {
   margin-top: 10px;
   width:15%;
   font-size: 20px;
+  margin-bottom: 15px;
 }
