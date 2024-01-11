@@ -84,6 +84,7 @@ const CreateNote = () => {
           </div>
         ))}
       </div>
+      <div className="form-container">
       <form onSubmit={onSubmit}>
       
         <label htmlFor="title">Title</label>
@@ -106,6 +107,7 @@ const CreateNote = () => {
 
         <button type="submit">Create Note</button>
       </form>
+      </div>
     </div>
   );
 };
