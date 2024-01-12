@@ -90,7 +90,8 @@ ul {
 }
 
 li {
-  margin-bottom: 50px;
+  margin-bottom: 10px;
+  list-style-type: circle;
 }
 
 p {
