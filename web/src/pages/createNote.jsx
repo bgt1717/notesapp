@@ -136,7 +136,7 @@ const CreateNote = () => {
           <div className="title-lines" key={userNote._id}>
             {userNote.editing ? (
               <div>
-                <label htmlFor={`title-${userNote._id}`}>Title</label>
+                <label htmlFor={`title-${userNote._id}`}>Title:</label>
                 <input
                   type="text"
                   id={`title-${userNote._id}`}
@@ -151,22 +151,25 @@ const CreateNote = () => {
                   }}
                 />
                 
-                <label htmlFor={`lines-${userNote._id}`}>Lines</label>
-                {userNote.lines.map((line, idx) => (
-                  <input
-                    key={idx}
-                    type="text"
-                    name={`lines-${userNote._id}`}
-                    value={line.content}
-                    onChange={(e) => {
-                      setUserNotes((prevNotes) => {
-                        const updatedNotes = [...prevNotes];
-                        updatedNotes.find((note) => note._id === userNote._id).lines[idx].content = e.target.value;
-                        return updatedNotes;
-                      });
-                    }}
-                  />
-                ))}
+                <label htmlFor={`lines-${userNote._id}`}></label>
+                <ul>
+                  {userNote.lines.map((line, idx) => (
+                    <li key={idx}>
+                      <input
+                        type="text"
+                        name={`lines-${userNote._id}`}
+                        value={line.content}
+                        onChange={(e) => {
+                          setUserNotes((prevNotes) => {
+                            const updatedNotes = [...prevNotes];
+                            updatedNotes.find((note) => note._id === userNote._id).lines[idx].content = e.target.value;
+                            return updatedNotes;
+                          });
+                        }}
+                      />
+                    </li>
+                  ))}
+                </ul>
                 
                 <button className="formbutton" onClick={() => saveChanges(userNote._id)}>
                   Save Changes
@@ -183,11 +186,11 @@ const CreateNote = () => {
 
                 {/* Add edit and delete buttons for each note */}
                 <button className="formbutton" onClick={() => editNote(userNote._id)}>
-                  Edit Note
+                  Edit
                 </button>
                 
                 <button className="formbutton" onClick={() => deleteNote(userNote._id)}>
-                  Delete Note
+                  Delete
                 </button>
               </div>
             )}
@@ -196,29 +199,33 @@ const CreateNote = () => {
       </div>
 
       <div className="form-container">
-      <form onSubmit={onSubmit}>
-      
-        <label className="title" htmlFor="title">Title</label>
-        <input type="text" id="title" name="title" onChange={handleChange} />
+  <form onSubmit={onSubmit}>
+    
+    <label className="title" htmlFor="title">Title</label>
+    <input type="text" id="title" name="title" onChange={handleChange} />
 
-        <label className="title" htmlFor="lines">Lines</label>
-        {note.lines.map((line, idx) => (
+    <label className="title" htmlFor="lines">Lines:</label>
+    <ul>
+      {note.lines.map((line, idx) => (
+        <li key={idx}>
           <input
-            key={idx}
             type="text"
             name="lines"
+            placeholder={`Line ${idx + 1}`}
             value={line.content}
             onChange={(event) => handleLineChange(event, idx)}
           />
-        ))}
-        
-        <button className="formbutton" type="button" onClick={addLine}>
-          Add Line
-        </button>
+        </li>
+      ))}
+    </ul>
+    
+    <button className="formbutton" type="button" onClick={addLine}>
+      Add Line
+    </button>
 
-        <button className="formbutton" type="submit">Create Note</button>
-      </form>
-      </div>
+    <button className="formbutton" type="submit">Create Note</button>
+  </form>
+</div>
     </div>
   );
 };
