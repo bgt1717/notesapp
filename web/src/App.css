@@ -103,7 +103,7 @@ p {
   display: flex;
   justify-content: space-around; /* Adjust as needed */
   background-color: lightgrey; /* Set the background color to match .auth */
-  padding: 20px;
+  padding: 0px;
   padding-bottom: 100%; /* Remove margin */
 }
 
@@ -137,21 +137,23 @@ p {
 }
 
 .title {
-  font-size: 25px;
+  font-size: 30px;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
   text-align: center;
 }
 .titleform{
-  font-size: 25px;
+  font-size: 30px;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
   text-align: center;
+  
+  
 }
 .form-container{
   background-color: lightgreen;
   width: 50%;
-  padding:20px;
+
   
   
 }
@@ -159,6 +161,7 @@ p {
   background-color: lightseagreen;
   border-style: solid;
   border-radius: 5px;
+  
 }
 
 .formbutton{
@@ -167,4 +170,8 @@ p {
   width:50%;
   font-size: 20px;
   margin-bottom: 15px;
+}
+
+.logoutbutton{
+  background-color: lightblue;
 }
