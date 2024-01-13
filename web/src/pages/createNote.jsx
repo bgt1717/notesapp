@@ -49,18 +49,6 @@ const CreateNote = () => {
   const addLine = () => {
     setNote({ ...note, lines: [...note.lines, { content: "" }] });
   };
-  // Function to add a line during editing
-  const addEditingLine = (userNoteIndex) => {
-    setUserNotes((prevNotes) => {
-      const updatedNotes = [...prevNotes];
-      const lines = updatedNotes[userNoteIndex].lines;
-      if (lines.length === 0 || lines[lines.length - 1].content.trim() !== "") {
-        // Add a new line only if the last line is not empty
-        updatedNotes[userNoteIndex].lines.push({ content: "" });
-      }
-      return updatedNotes;
-    });
-  };
   
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -74,56 +62,6 @@ const CreateNote = () => {
     } catch (err) {
       console.error(err);
       alert("Note creation failed. Please try again.");
-    }
-  };
-
-  const deleteNote = async (noteID) => {
-    try {
-      await axios.delete(`http://localhost:3001/notes/delete-note/${noteID}`, {
-        headers: { authorization: cookies.access_token },
-      });
-
-      alert("Note deleted successfully!");
-      window.location.reload();
-    } catch (err) {
-      console.error(err);
-      alert("Note deletion failed. Please try again.");
-    }
-  };
-
-  const editNote = (userNoteIndex) => {
-    setUserNotes((prevNotes) => {
-      const updatedNotes = [...prevNotes];
-      updatedNotes[userNoteIndex].editing = true;
-      return updatedNotes;
-    });
-  };
-
-  const saveChanges = async (userNoteIndex, noteID) => {
-    try {
-      const editedNote = userNotes[userNoteIndex];
-
-      await axios.put(
-        `http://localhost:3001/notes/update-note/${noteID}`,
-        {
-          title: editedNote.title,
-          lines: editedNote.lines,
-        },
-        {
-          headers: { authorization: cookies.access_token },
-        }
-      );
-
-      setUserNotes((prevNotes) => {
-        const updatedNotes = [...prevNotes];
-        updatedNotes[userNoteIndex].editing = false;
-        return updatedNotes;
-      });
-
-      alert("Note updated successfully!");
-    } catch (err) {
-      console.error(err);
-      alert("Note update failed. Please try again.");
     }
   };
 
