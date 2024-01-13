@@ -17,8 +17,6 @@ const CreateNote = () => {
 
   const [userNotes, setUserNotes] = useState([]);
 
-  // const navigate = useNavigate();
-
   useEffect(() => {
     const fetchUserNotes = async () => {
       try {
@@ -39,6 +37,7 @@ const CreateNote = () => {
     const { name, value } = event.target;
     setNote({ ...note, [name]: value });
   };
+
   const handleLineChange = (event, idx) => {
     const { value } = event.target;
     const truncatedValue = value.slice(0, 50); // Keep only the first 50 characters
@@ -46,10 +45,23 @@ const CreateNote = () => {
     lines[idx] = { content: truncatedValue };
     setNote({ ...note, lines });
   };
+
   const addLine = () => {
     setNote({ ...note, lines: [...note.lines, { content: "" }] });
   };
-
+  // Function to add a line during editing
+  const addEditingLine = (userNoteIndex) => {
+    setUserNotes((prevNotes) => {
+      const updatedNotes = [...prevNotes];
+      const lines = updatedNotes[userNoteIndex].lines;
+      if (lines.length === 0 || lines[lines.length - 1].content.trim() !== "") {
+        // Add a new line only if the last line is not empty
+        updatedNotes[userNoteIndex].lines.push({ content: "" });
+      }
+      return updatedNotes;
+    });
+  };
+  
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -57,64 +69,54 @@ const CreateNote = () => {
         headers: { authorization: cookies.access_token },
       });
 
-      // Update the URL to navigate to the correct endpoint
       alert("Note created successfully!");
-      // navigate("/"); // Change this to your desired route
-      window.location.reload(); //refreshes page upon success. 
+      window.location.reload();
     } catch (err) {
       console.error(err);
       alert("Note creation failed. Please try again.");
     }
   };
 
-   // Function to delete a note
-   const deleteNote = async (noteID) => {
+  const deleteNote = async (noteID) => {
     try {
       await axios.delete(`http://localhost:3001/notes/delete-note/${noteID}`, {
         headers: { authorization: cookies.access_token },
       });
 
       alert("Note deleted successfully!");
-      window.location.reload(); // Refresh the page upon success
+      window.location.reload();
     } catch (err) {
       console.error(err);
       alert("Note deletion failed. Please try again.");
     }
   };
 
-  // Function to edit a note
-  const editNote = async (noteID) => {
-    try {
-      // Set the note to be edited
-      const editedNoteIndex = userNotes.findIndex((note) => note._id === noteID);
-      setUserNotes((prevNotes) => {
-        const updatedNotes = [...prevNotes];
-        updatedNotes[editedNoteIndex] = { ...updatedNotes[editedNoteIndex], editing: true };
-        return updatedNotes;
-      });
-    } catch (err) {
-      console.error(err);
-      alert("Note editing failed. Please try again.");
-    }
+  const editNote = (userNoteIndex) => {
+    setUserNotes((prevNotes) => {
+      const updatedNotes = [...prevNotes];
+      updatedNotes[userNoteIndex].editing = true;
+      return updatedNotes;
+    });
   };
 
-  // Function to save changes after editing
-  const saveChanges = async (noteID) => {
+  const saveChanges = async (userNoteIndex, noteID) => {
     try {
-      const editedNoteIndex = userNotes.findIndex((note) => note._id === noteID);
-      const editedNote = userNotes[editedNoteIndex];
+      const editedNote = userNotes[userNoteIndex];
 
-      // Send a PUT request to update the note
-      await axios.put(`http://localhost:3001/notes/update-note/${noteID}`, {
-        title: editedNote.title,
-        lines: editedNote.lines,
-      }, {
-        headers: { authorization: cookies.access_token },
-      });
+      await axios.put(
+        `http://localhost:3001/notes/update-note/${noteID}`,
+        {
+          title: editedNote.title,
+          lines: editedNote.lines,
+        },
+        {
+          headers: { authorization: cookies.access_token },
+        }
+      );
 
       setUserNotes((prevNotes) => {
         const updatedNotes = [...prevNotes];
-        updatedNotes[editedNoteIndex] = { ...updatedNotes[editedNoteIndex], editing: false };
+        updatedNotes[userNoteIndex].editing = false;
         return updatedNotes;
       });
 
@@ -125,14 +127,12 @@ const CreateNote = () => {
     }
   };
 
-
   return (
     <div className="create-note">
-      {/* <h2>Create Note</h2> */}
       <div className="existing-notes">
         <h3 className="title">Existing Notes:</h3>
-        
-        {userNotes.map((userNote) => (
+
+        {userNotes.map((userNote, userNoteIndex) => (
           <div className="title-lines" key={userNote._id}>
             {userNote.editing ? (
               <div>
@@ -145,12 +145,12 @@ const CreateNote = () => {
                   onChange={(e) => {
                     setUserNotes((prevNotes) => {
                       const updatedNotes = [...prevNotes];
-                      updatedNotes.find((note) => note._id === userNote._id).title = e.target.value;
+                      updatedNotes[userNoteIndex].title = e.target.value;
                       return updatedNotes;
                     });
                   }}
                 />
-                
+
                 <label htmlFor={`lines-${userNote._id}`}></label>
                 <ul>
                   {userNote.lines.map((line, idx) => (
@@ -162,7 +162,7 @@ const CreateNote = () => {
                         onChange={(e) => {
                           setUserNotes((prevNotes) => {
                             const updatedNotes = [...prevNotes];
-                            updatedNotes.find((note) => note._id === userNote._id).lines[idx].content = e.target.value;
+                            updatedNotes[userNoteIndex].lines[idx].content = e.target.value;
                             return updatedNotes;
                           });
                         }}
@@ -170,9 +170,13 @@ const CreateNote = () => {
                     </li>
                   ))}
                 </ul>
-                
-                <button className="formbutton" onClick={() => saveChanges(userNote._id)}>
+
+                <button className="formbutton" onClick={() => saveChanges(userNoteIndex, userNote._id)}>
                   Save Changes
+                </button>
+
+                <button className="formbutton" onClick={() => addEditingLine(userNoteIndex)}>
+                  Add Line
                 </button>
               </div>
             ) : (
@@ -184,11 +188,10 @@ const CreateNote = () => {
                   ))}
                 </ul>
 
-                {/* Add edit and delete buttons for each note */}
-                <button className="formbutton" onClick={() => editNote(userNote._id)}>
+                <button className="formbutton" onClick={() => editNote(userNoteIndex)}>
                   Edit
                 </button>
-                
+
                 <button className="formbutton" onClick={() => deleteNote(userNote._id)}>
                   Delete
                 </button>
@@ -197,37 +200,44 @@ const CreateNote = () => {
           </div>
         ))}
       </div>
-  
-  <div className="form-container">
-  <h3 className="titleform">Create Note:</h3>
-  <form className ="form-titlelines" onSubmit={onSubmit}>
-    <label className="title" htmlFor="title">Title</label>
-    <input type="text" id="title" name="title" onChange={handleChange} />
 
-    <label className="title" htmlFor="lines">Lines:</label>
-    <ul>
-      {note.lines.map((line, idx) => (
-        <li key={idx}>
-          <input
-            type="text"
-            name="lines"
-            placeholder={`Line ${idx + 1}`}
-            value={line.content}
-            onChange={(event) => handleLineChange(event, idx)}
-          />
-        </li>
-      ))}
-    </ul>
-    
-    <button className="formbutton" type="button" onClick={addLine}>
-      Add Line
-    </button>
+      <div className="form-container">
+        <h3 className="titleform">Create Note:</h3>
+        <form className="form-titlelines" onSubmit={onSubmit}>
+          <label className="title" htmlFor="title">
+            Title
+          </label>
+          <input type="text" id="title" name="title" onChange={handleChange} />
 
-    <button className="formbutton" type="submit">Create Note</button>
-  </form>
-</div>
+          <label className="title" htmlFor="lines">
+            Lines:
+          </label>
+          <ul>
+            {note.lines.map((line, idx) => (
+              <li key={idx}>
+                <input
+                  type="text"
+                  name="lines"
+                  placeholder={`Line ${idx + 1}`}
+                  value={line.content}
+                  onChange={(event) => handleLineChange(event, idx)}
+                />
+              </li>
+            ))}
+          </ul>
+
+          <button className="formbutton" type="button" onClick={addLine}>
+            Add Line
+          </button>
+
+          <button className="formbutton" type="submit">
+            Create Note
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
 
 export default CreateNote;
+
