@@ -129,7 +129,7 @@ const CreateNote = () => {
 
   return (
     <div className="create-note">
-      <div className="existing-notes">
+      {/* <div className="existing-notes">
         <h3 className="title">Existing Notes:</h3>
 
         {userNotes.map((userNote, userNoteIndex) => (
@@ -199,7 +199,7 @@ const CreateNote = () => {
             )}
           </div>
         ))}
-      </div>
+      </div> */}
 
       <div className="form-container">
         <h3 className="titleform">Create Note:</h3>
