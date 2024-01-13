@@ -20,7 +20,7 @@ const Navbar = () => {
       ) : ( 
         <>
       <Link to="/createnote"> Create Note </Link>
-      {/* <Link to="/savednotes"> Saved Notes </Link> */}
+      <Link to="/savedNotes"> Saved Notes </Link>
 
       <button onClick={logout}>Logout </button>                   
       </> //Otherwise, Display a button to Logout. When pressed, it calls the logout function.

@@ -4,6 +4,7 @@ import Auth from './pages/auth';
 import Home from './pages/home';
 import CreateNote from './pages/createNote';
 import Navbar from './components/navbar';
+import SavedNotes from './pages/savedNotes';
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/auth" element={<Auth />} />
         <Route path="/createnote" element={<CreateNote />} />
+        <Route path="/savednotes" element={<SavedNotes />} />
       </Routes>
     </Router>
     </>
