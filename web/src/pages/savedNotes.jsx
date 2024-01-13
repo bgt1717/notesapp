@@ -62,21 +62,6 @@ const savedNotes = () => {
     });
   };
   
-//   const onSubmit = async (event) => {
-//     event.preventDefault();
-//     try {
-//       await axios.post("http://localhost:3001/notes/create-note", note, {
-//         headers: { authorization: cookies.access_token },
-//       });
-
-//       alert("Note created successfully!");
-//       window.location.reload();
-//     } catch (err) {
-//       console.error(err);
-//       alert("Note creation failed. Please try again.");
-//     }
-//   };
-
   const deleteNote = async (noteID) => {
     try {
       await axios.delete(`http://localhost:3001/notes/delete-note/${noteID}`, {

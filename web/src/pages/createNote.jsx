@@ -8,6 +8,7 @@ import { useGetUserID } from "../hooks/useGetUserID";
 const CreateNote = () => {
   const [cookies, _] = useCookies(["access_token"]);
   const userID = useGetUserID();
+  const navigate = useNavigate();
 
   const [note, setNote] = useState({
     title: "",
@@ -58,7 +59,7 @@ const CreateNote = () => {
       });
 
       alert("Note created successfully!");
-      window.location.reload();
+      navigate("/savedNotes"); // Redirect to the "savedNotes" page
     } catch (err) {
       console.error(err);
       alert("Note creation failed. Please try again.");
