@@ -62,20 +62,20 @@ const savedNotes = () => {
     });
   };
   
-  const onSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      await axios.post("http://localhost:3001/notes/create-note", note, {
-        headers: { authorization: cookies.access_token },
-      });
+//   const onSubmit = async (event) => {
+//     event.preventDefault();
+//     try {
+//       await axios.post("http://localhost:3001/notes/create-note", note, {
+//         headers: { authorization: cookies.access_token },
+//       });
 
-      alert("Note created successfully!");
-      window.location.reload();
-    } catch (err) {
-      console.error(err);
-      alert("Note creation failed. Please try again.");
-    }
-  };
+//       alert("Note created successfully!");
+//       window.location.reload();
+//     } catch (err) {
+//       console.error(err);
+//       alert("Note creation failed. Please try again.");
+//     }
+//   };
 
   const deleteNote = async (noteID) => {
     try {
@@ -120,7 +120,7 @@ const savedNotes = () => {
         return updatedNotes;
       });
 
-      alert("Note updated successfully!");
+    //   alert("Note updated successfully!");
     } catch (err) {
       console.error(err);
       alert("Note update failed. Please try again.");
@@ -201,40 +201,6 @@ const savedNotes = () => {
         ))}
       </div>
 
-      {/* <div className="form-container">
-        <h3 className="titleform">Create Note:</h3>
-        <form className="form-titlelines" onSubmit={onSubmit}>
-          <label className="title" htmlFor="title">
-            Title
-          </label>
-          <input type="text" id="title" name="title" onChange={handleChange} />
-
-          <label className="title" htmlFor="lines">
-            Lines:
-          </label>
-          <ul>
-            {note.lines.map((line, idx) => (
-              <li key={idx}>
-                <input
-                  type="text"
-                  name="lines"
-                  placeholder={`Line ${idx + 1}`}
-                  value={line.content}
-                  onChange={(event) => handleLineChange(event, idx)}
-                />
-              </li>
-            ))}
-          </ul>
-
-          <button className="formbutton" type="button" onClick={addLine}>
-            Add Line
-          </button>
-
-          <button className="formbutton" type="submit">
-            Create Note
-          </button>
-        </form>
-      </div> */}
     </div>
   );
 };

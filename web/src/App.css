@@ -104,7 +104,8 @@ p {
 .create-note {
   display: flex;
   justify-content: space-around; /* Adjust as needed */
-  background-color: lightgrey; /* Set the background color to match .auth */
+  /* background-color: lightgrey; Set the background color to match .auth */
+  background-color: lightsalmon;
   padding: 0px;
   padding-bottom: 100%; /* Remove margin */
 }
@@ -153,7 +154,7 @@ p {
   
 }
 .form-container{
-  background-color: lightgreen;
+  /* background-color: lightgreen; */
   width: 50%;
 
   
@@ -165,6 +166,7 @@ p {
   border-radius: 5px;
   margin-left: 5%;
   margin-right: 5%;
+  
   
 }
 
