@@ -54,6 +54,7 @@ input {
   padding: 10px;
   font-size: 16px;
   border-radius: 5px;
+  width: 90%;
 }
 
 .navbar {
@@ -87,6 +88,7 @@ ul {
   padding: 0;
   margin: 10px 10px;
   font-size: 20px;
+  width:90%;
 }
 
 li {
@@ -161,6 +163,8 @@ p {
   background-color: lightseagreen;
   border-style: solid;
   border-radius: 5px;
+  margin-left: 5%;
+  margin-right: 5%;
   
 }
 
