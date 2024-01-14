@@ -216,11 +216,21 @@ p {
 }
 
 .CenteredColumn {
-  width: 50%;
-  font-size: 100px;
+  width: 65%;
+  font-size: 20px;
 }
 
 .CenteredText {
   text-align: center;
   font-size: 50px;
+}
+
+.CenteredTextSmall{
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+.YellowButton{
+  margin-top: 10px;
+  background-color: yellow;
 }
