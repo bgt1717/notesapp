@@ -20,7 +20,9 @@ const savedNotes = () => {
   useEffect(() => {
     const fetchUserNotes = async () => {
       try {
-        const url = `http://localhost:3001/notes/get-notes/${userID}`;
+        //http://localhost:3001/notes/get-notes/${userID}`
+        //https://notesbackend-luyt.onrender.com
+        const url = `https://notesbackend-luyt.onrender.com/notes/get-notes/${userID}`;
         const response = await axios.get(url, {
           headers: { authorization: cookies.access_token },
         });
@@ -48,7 +50,9 @@ const savedNotes = () => {
   
   const deleteNote = async (noteID) => {
     try {
-      await axios.delete(`http://localhost:3001/notes/delete-note/${noteID}`, {
+        //`http://localhost:3001/notes/delete-note/${noteID}`
+        //https://notesbackend-luyt.onrender.com
+      await axios.delete(`https://notesbackend-luyt.onrender.com/notes/delete-note/${noteID}`, {
         headers: { authorization: cookies.access_token },
       });
 
@@ -73,7 +77,9 @@ const savedNotes = () => {
       const editedNote = userNotes[userNoteIndex];
 
       await axios.put(
-        `http://localhost:3001/notes/update-note/${noteID}`,
+        //`http://localhost:3001/notes/update-note/${noteID}`
+        //https://notesbackend-luyt.onrender.com
+        `https://notesbackend-luyt.onrender.com/notes/update-note/${noteID}`,
         {
           title: editedNote.title,
           lines: editedNote.lines,

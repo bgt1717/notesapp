@@ -21,7 +21,9 @@ const CreateNote = () => {
   useEffect(() => {
     const fetchUserNotes = async () => {
       try {
-        const url = `http://localhost:3001/notes/get-notes/${userID}`;
+        //`http://localhost:3001/notes/get-notes/${userID}`
+        // https://notesbackend-luyt.onrender.com
+        const url = `https://notesbackend-luyt.onrender.com/${userID}`;
         const response = await axios.get(url, {
           headers: { authorization: cookies.access_token },
         });
@@ -54,7 +56,9 @@ const CreateNote = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:3001/notes/create-note", note, {
+      //"http://localhost:3001/notes/create-note"
+      //https://notesbackend-luyt.onrender.com
+      await axios.post("https://notesbackend-luyt.onrender.com/notes/create-note", note, {
         headers: { authorization: cookies.access_token },
       });
 

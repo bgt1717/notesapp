@@ -25,7 +25,9 @@ const Login = () => {
     event.preventDefault();
     try{
       //response grabs everything sent back from API. 
-      const response = await axios.post("http://localhost:3001/auth/login", {
+      //"http://localhost:3001/auth/login"
+      //https://notesbackend-luyt.onrender.com
+      const response = await axios.post("https://notesbackend-luyt.onrender.com/auth/login", {
         username, 
         password,
       }); //pass in object of username and password for the request.
@@ -56,7 +58,9 @@ const Register = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:3001/auth/register", {
+      //"http://localhost:3001/auth/register"
+      //https://notesbackend-luyt.onrender.com
+      await axios.post("https://notesbackend-luyt.onrender.com/auth/register", {
         username, 
         password,
       }); //pass in object of username and password for the request.
