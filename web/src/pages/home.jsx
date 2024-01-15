@@ -10,6 +10,10 @@ const Home = () => {
     navigate('/auth');
   };
 
+  const handleButtonClick2 = () => {
+    navigate('/createnote');
+  };
+
   return (
     <div className="HomeContainer">
       <div className="CenteredColumn">
@@ -21,9 +25,13 @@ const Home = () => {
           Made with node.JS, MongoDB, EJS, React, and MongoDB.
         </div>
       </div>
-      {!cookies.access_token && (
+      {!cookies.access_token ? (
         <button className="YellowButton" onClick={handleButtonClick}>
           Try MyNotes, It's FREE!
+        </button>
+      ) : (
+        <button className="YellowButton" onClick={handleButtonClick2}>
+          Create a Note
         </button>
       )}
     </div>
@@ -31,5 +39,6 @@ const Home = () => {
 }
 
 export default Home;
+
 
 

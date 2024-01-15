@@ -33,22 +33,6 @@ const savedNotes = () => {
     fetchUserNotes();
   }, [userID, cookies.access_token]);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setNote({ ...note, [name]: value });
-  };
-
-  const handleLineChange = (event, idx) => {
-    const { value } = event.target;
-    const truncatedValue = value.slice(0, 50); // Keep only the first 50 characters
-    const lines = [...note.lines];
-    lines[idx] = { content: truncatedValue };
-    setNote({ ...note, lines });
-  };
-
-  const addLine = () => {
-    setNote({ ...note, lines: [...note.lines, { content: "" }] });
-  };
   // Function to add a line during editing
   const addEditingLine = (userNoteIndex) => {
     setUserNotes((prevNotes) => {

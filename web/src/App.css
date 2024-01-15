@@ -210,13 +210,13 @@ p {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 50vh;
+  height: 80vh;
   text-align: center;
   
 }
 
 .CenteredColumn {
-  width: 65%;
+  width: 70%;
   font-size: 20px;
 }
 
@@ -226,11 +226,18 @@ p {
 }
 
 .CenteredTextSmall{
-  margin-top: 10px;
+  margin-top: 30px;
   font-size: 20px;
+  color: black;
+
 }
 
 .YellowButton{
-  margin-top: 10px;
-  background-color: yellow;
+  margin-top: 30px;
+  background-color: lightyellow;
+  padding:10px;
+  border-radius: 10px;
+  border-style: solid;
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
 }
