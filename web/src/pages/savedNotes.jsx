@@ -142,6 +142,18 @@ const savedNotes = () => {
                           });
                         }}
                       />
+                      <button
+                        className="formbutton"
+                        onClick={() => {
+                          setUserNotes((prevNotes) => {
+                            const updatedNotes = [...prevNotes];
+                            updatedNotes[userNoteIndex].lines.splice(idx, 1); // Remove the line
+                            return updatedNotes;
+                          });
+                        }}
+                      >
+                        Delete Line
+                      </button>
                     </li>
                   ))}
                 </ul>
@@ -175,7 +187,6 @@ const savedNotes = () => {
           </div>
         ))}
       </div>
-
     </div>
   );
 };
