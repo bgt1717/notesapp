@@ -132,7 +132,7 @@ p {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50%;
+  width: 90%;
 }
 
 .existing-notes ul {
@@ -226,10 +226,27 @@ p {
   border-radius: 10px;
 }
 
+@media (max-width: 500px) {
+  .CenteredColumn {
+    width: 50%; /* Adjust the width as needed */
+    font-size: 10px; /* Adjust the font size as needed */
+    padding: 30px; /* Adjust the padding as needed */
+  }
+}
+
+
 .CenteredText {
   text-align: center;
   font-size: 50px;
 }
+
+@media (max-width: 500px) {
+  .CenteredText {
+    font-size: 25px; /* Adjust the size as needed */
+  }
+}
+
+
 
 .CenteredTextSmall{
   margin-top: 30px;
