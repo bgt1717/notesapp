@@ -17,8 +17,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-color: #f2f2f2;
+  height: 80vh;
+  background-color: lightsalmon;
 }
 
 .auth-container {
@@ -27,16 +27,18 @@ body {
   justify-content: center;
   align-items: center;
   padding: 20px;
-  background-color: white;
+  background-color: lightyellow;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   margin: 20px;
   width: 400px;
+  border-style: solid;
 }
 form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  
 }
 
 .form-group {
