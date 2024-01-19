@@ -1,18 +1,26 @@
-.HomeContainer{
-    background-color: none;
+.HomeContainer {
+    background-color: transparent; /* Use transparent instead of none */
+    margin-top: -100px;
 }
 
-.navigatebutton{
-    background-color: lightcoral;
-    padding: 30px;
-    width: 350px;
-    border-style: solid;
-    border-color: black;
-    border-width: 5px;
-    cursor: pointer;
-    font-size: 40px;
-    font-style: italic;
-    font-weight: 500;
+.homeimage img {
+    width: 100%; /* Set the image width to 100% of its container */
+}
 
-    
+.navigatebutton {
+    background-color: lightcoral;
+    padding: 15px; /* Adjust padding for responsiveness */
+    width: 65%; /* Adjust width for responsiveness */
+    max-width: 350px; /* Set a maximum width to avoid stretching on larger screens */
+    border: 5px solid black; /* Combine border properties */
+    cursor: pointer;
+    font-size: 2.5vw; /* Use viewport width for font size */
+    font-style: italic;
+    font-weight: 400; /* Adjusted font weight */
+}
+
+@media (max-width: 700px) {
+    .homeimage img {
+        content: url('../assets/d2.svg'); /* Change the image source for screens with a width up to 700px */
+    }
 }

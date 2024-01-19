@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
-import t1 from '../assets/t1.svg';
+import t3 from '../assets/t3.svg';
 import './home.css'
 
 const Home = () => {
@@ -19,7 +19,7 @@ const Home = () => {
   return (
     <div className="HomeContainer">
       <div className="homeimage">
-        <img src={t1} style={{width:"1500px"}} alt="" className="" />
+        <img src={t3} alt="" className="" />
       </div>
       {!cookies.access_token ? (
         <button className="navigatebutton" onClick={handleButtonClick}>
