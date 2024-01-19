@@ -194,14 +194,6 @@ p {
   
 }
 
-.logoutbutton {
-  color:lightcoral;
-  border: none;
-  cursor: pointer;
-  font-size: 20px;
-  background-color: black;
-}
-
 .titlecreatenotecontainer{
   display: flex;
   justify-content: space-between;
@@ -263,4 +255,17 @@ p {
   border-style: solid;
   cursor: pointer;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.hero{
+  margin-top: 80px;
+  
+}
+.hero {
+  position: absolute;
+  top: 100;
+  left: 10;
+  width: 70%;
+  height: 70%;
+  overflow: hidden;
 }

@@ -1,0 +1,18 @@
+.HomeContainer{
+    background-color: none;
+}
+
+.navigatebutton{
+    background-color: lightcoral;
+    padding: 30px;
+    width: 350px;
+    border-style: solid;
+    border-color: black;
+    border-width: 5px;
+    cursor: pointer;
+    font-size: 40px;
+    font-style: italic;
+    font-weight: 500;
+
+    
+}
