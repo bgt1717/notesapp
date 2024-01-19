@@ -25,7 +25,7 @@ const Navbar = () => {
           <>
             <Link to="/createnote">Create Note</Link>
             <Link to="/savedNotes">Saved Notes</Link>
-            <button className="logoutbutton" onClick={logout}>Logout</button>
+            <Link to="/auth" onClick={logout}>Logout</Link>
           </>
         )}
       </div>
