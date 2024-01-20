@@ -1,25 +1,36 @@
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 80px;
-    background-color: black;
-    color: white;
-    padding: 0 20px; /* Adjust padding as needed */
-    width: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  background-color: black;
+  color: white;
+  padding: 0 20px;
+  width: auto;
+}
+
+.logo {
+  font-size: 25px;
+}
+
+.nav-links {
+  display: flex;
+}
+
+.nav-links a {
+  margin: 0 15px;
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+/* Media query for screens with a maximum width of 500px */
+@media (max-width: 500px) {
+  .logo {
+    font-size: 12.5px; /* Adjust the font size as needed */
   }
 
-  .logo {
-    font-size: 25px;
-  }
-  
-.nav-links {
-    display: flex;
-  }
-  
   .nav-links a {
-    margin: 0 15px; /* Adjust margin as needed */
-    color: white;
-    text-decoration: none;
-    font-size: 20px;
+    font-size: 12px; /* Adjust the font size as needed */
   }
+}

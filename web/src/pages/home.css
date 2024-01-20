@@ -1,6 +1,6 @@
 .HomeContainer {
     background-color: transparent; /* Use transparent instead of none */
-    margin-top: -100px;
+
     
 }
 .HomeContainer {
@@ -8,7 +8,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 80vh;
+   
     text-align: center;
     
   }
