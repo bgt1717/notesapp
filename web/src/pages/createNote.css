@@ -1,0 +1,33 @@
+.create-note {
+    display: flex;
+    justify-content: space-around; /* Adjust as needed */
+    /* background-color: lightsalmon; */
+    padding: 0px;
+  
+  }
+  .formbutton{
+    background-color:  lightyellow;
+    margin-top: 10px;
+    width:50%;
+    font-size: 20px;
+    margin-bottom: 15px;
+    
+  }
+
+  .form-container{
+    /* background-color: lightgreen; */
+    width: 50%;
+  
+    
+    
+  }
+  .form-titlelines{
+    background-color: lightyellow;
+    border-style: solid;
+    border-radius: 5px;
+    margin-left: 5%;
+    margin-right: 5%;
+    
+    
+  }
+  
