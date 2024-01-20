@@ -5,10 +5,18 @@ import { useNavigate } from "react-router-dom";
 
 
 const Auth = () => {
+  const [isLogin, setIsLogin] = useState(true);
+
+  const toggleForm = () => {
+    setIsLogin(!isLogin);
+  };
+
   return (
     <div className="auth">
-      <Login />
-      <Register />
+      {isLogin ? <Login /> : <Register />}
+      <button className="toggleButton" onClick={toggleForm}>
+        {isLogin ? "Switch to Register" : "Switch to Login"}
+      </button>
     </div>
   );
 };
